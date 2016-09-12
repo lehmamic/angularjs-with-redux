@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "serve": "webpack-dev-server",
+    "serve": "webpack-dev-server --port 4300",
     "postinstall": "typings install"
   },
   "author": "",
@@ -14,7 +14,8 @@
   "dependencies": {
     "angular": "^1.5.8",
     "bootstrap": "^3.3.7",
-    "jquery": "^3.1.0"
+    "jquery": "^3.1.0",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "source-map-loader": "^0.1.5",

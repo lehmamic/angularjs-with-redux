@@ -1,4 +1,7 @@
 import * as angular from 'angular';
+import { Store } from 'redux';
+import { AppState } from '../shared/app.state';
+import * as CounterActions from './counter-actions-creator';
 
 export class CounterComponent implements angular.IComponentOptions{
     public template: string = `<div class="row">
@@ -32,11 +35,22 @@ export class CounterComponent implements angular.IComponentOptions{
 export class CounterComponentController{
     public counter: number = 0;
     
+    /*@ngInject*/
+    constructor(private appStore: Store<AppState>) {
+        this.appStore.subscribe(() => this.readState());
+        this.readState();
+    }
+
     public increment(): void {
-        this.counter++;
+        this.appStore.dispatch(CounterActions.increment());
     }
 
     public decrement(): void {
-        this.counter--;
+        this.appStore.dispatch(CounterActions.decrement());
     }
+
+    private readState = (()=>  {
+        const state = this.appStore.getState();
+        this.counter = state.counter;
+    });
 }
